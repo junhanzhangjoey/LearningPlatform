@@ -1,0 +1,277 @@
+{
+    "allModules": [
+        {
+            "moduleId": "8b88a195-6684-4315-8b11-9eb072bdf6ec",
+            "courseId": "659760de-e1c4-4187-9b34-6aeb369d1db3",
+            "title": "Control Flow",
+            "content": "Explore conditionals, loops, and logical operators.",
+            "type": "Video",
+            "moduleVideo": "https://example.com/videos/control-flow.mp4",
+            "comments": [],
+            "order": 0
+        },
+        {
+            "moduleId": "166f921c-afc1-4dcb-b5dd-0bdb8b5690f5",
+            "courseId": "659760de-e1c4-4187-9b34-6aeb369d1db3",
+            "title": "Setup Your Environment",
+            "content": "Learn how to install everything you need.",
+            "type": "Video",
+            "moduleVideo": "https://example.com/videos/setup.mp4",
+            "comments": [],
+            "order": 1
+        },
+        {
+            "moduleId": "new-uuid-5678-9012-3456",
+            "courseId": "659760de-e1c4-4187-9b34-6aeb369d1db3",
+            "title": "Final Review",
+            "content": "Review all key topics before completing the course.",
+            "type": "Text",
+            "moduleVideo": "",
+            "comments": [],
+            "order": 2
+        },
+        {
+            "moduleId": "0bf7d01a-8232-4f48-ace7-8a5dbb605bf3",
+            "courseId": "659760de-e1c4-4187-9b34-6aeb369d1db3",
+            "title": "Welcome to the Course",
+            "content": "This is an introduction to the course and what you can expect to learn.",
+            "type": "Text",
+            "moduleVideo": "",
+            "comments": [],
+            "order": 3
+        },
+        {
+            "moduleId": "1231231",
+            "courseId": "659760de-e1c4-4187-9b34-6aeb369d1db3",
+            "title": "第三",
+            "content": "Review all key topics before completing the course.",
+            "type": "Text",
+            "moduleVideo": "",
+            "comments": [],
+            "order": 4
+        },
+        {
+            "moduleId": "new-uuid-1234-5678-9012",
+            "courseId": "659760de-e1c4-4187-9b34-6aeb369d1db3",
+            "title": "Bonus Tips",
+            "content": "Extra tips and tricks to help you succeed.",
+            "type": "Text",
+            "moduleVideo": "",
+            "comments": [],
+            "order": 5
+        },
+        {
+            "moduleId": "1f999fa6-64f7-45b4-92ab-03702399a83f",
+            "courseId": "659760de-e1c4-4187-9b34-6aeb369d1db3",
+            "title": "junjunhan zhang",
+            "content": "Let’s walk through what the final project will look like.",
+            "type": "Text",
+            "moduleVideo": "",
+            "comments": [],
+            "order": 6
+        },
+        {
+            "moduleId": "new-uuid-007",
+            "courseId": "659760de-e1c4-4187-9b34-6aeb369d1db3",
+            "title": "Module 8: Introduction to Databases",
+            "content": "Learn the basics of relational and non-relational databases.",
+            "type": "Text",
+            "moduleVideo": "",
+            "comments": [],
+            "order": 7
+        },
+        {
+            "moduleId": "new-uuid-008",
+            "courseId": "659760de-e1c4-4187-9b34-6aeb369d1db3",
+            "title": "Module 9: Advanced MongoDB",
+            "content": "Explore aggregation pipelines and advanced queries.",
+            "type": "Video",
+            "moduleVideo": "",
+            "comments": [],
+            "order": 8
+        },
+        {
+            "moduleId": "new-uuid-009",
+            "courseId": "659760de-e1c4-4187-9b34-6aeb369d1db3",
+            "title": "Module 10: API Security",
+            "content": "Secure your API endpoints using authentication and authorization.",
+            "type": "Text",
+            "moduleVideo": "",
+            "comments": [],
+            "order": 9
+        },
+        {
+            "moduleId": "new-uuid-010",
+            "courseId": "659760de-e1c4-4187-9b34-6aeb369d1db3",
+            "title": "Module 11: Deployment Strategies",
+            "content": "Learn how to deploy applications using cloud providers.",
+            "type": "Video",
+            "moduleVideo": "",
+            "comments": [],
+            "order": 10
+        },
+        {
+            "moduleId": "new-uuid-011",
+            "courseId": "659760de-e1c4-4187-9b34-6aeb369d1db3",
+            "title": "Module 12: CI/CD Pipelines",
+            "content": "Implement continuous integration and continuous delivery.",
+            "type": "Text",
+            "moduleVideo": "",
+            "comments": [],
+            "order": 11
+        },
+        {
+            "moduleId": "new-uuid-012",
+            "courseId": "659760de-e1c4-4187-9b34-6aeb369d1db3",
+            "title": "Module 13: Testing Fundamentals",
+            "content": "Introduction to unit testing and integration testing.",
+            "type": "Text",
+            "moduleVideo": "",
+            "comments": [],
+            "order": 12
+        },
+        {
+            "moduleId": "new-uuid-013",
+            "courseId": "659760de-e1c4-4187-9b34-6aeb369d1db3",
+            "title": "Module 14: Advanced React Patterns",
+            "content": "Higher order components, render props, and hooks.",
+            "type": "Video",
+            "moduleVideo": "",
+            "comments": [],
+            "order": 13
+        },
+        {
+            "moduleId": "new-uuid-014",
+            "courseId": "659760de-e1c4-4187-9b34-6aeb369d1db3",
+            "title": "Module 15: State Management",
+            "content": "Understand Redux, Context API, and Zustand.",
+            "type": "Text",
+            "moduleVideo": "",
+            "comments": [],
+            "order": 14
+        },
+        {
+            "moduleId": "new-uuid-015",
+            "courseId": "659760de-e1c4-4187-9b34-6aeb369d1db3",
+            "title": "Module 16: Server-Side Rendering",
+            "content": "Learn SSR concepts using Next.js.",
+            "type": "Video",
+            "moduleVideo": "",
+            "comments": [],
+            "order": 15
+        },
+        {
+            "moduleId": "new-uuid-016",
+            "courseId": "659760de-e1c4-4187-9b34-6aeb369d1db3",
+            "title": "Module 17: Final Capstone Project",
+            "content": "Build a full-stack application as your final project.",
+            "type": "Text",
+            "moduleVideo": "",
+            "comments": [],
+            "order": 16
+        }
+    ],
+
+
+
+"allprogresses": [
+    {
+        "courseTitle": "Advanced JavaScript Concepts",
+        "progressPercentage": 88,
+        "userId": "1d23",
+        "courseId": "659760de-e1c4-4187-9b34-6aeb369d1db3",
+        "modules": [
+            {
+                "moduleId": "8b88a195-6684-4315-8b11-9eb072bdf6ec",
+                "completed": true
+            },
+            {
+                "moduleId": "166f921c-afc1-4dcb-b5dd-0bdb8b5690f5",
+                "completed": true
+            },
+            {
+                "moduleId": "0bf7d01a-8232-4f48-ace7-8a5dbb605bf3",
+                "completed": true
+            },
+            {
+                "moduleId": "new-uuid-1234-5678-9012",
+                "completed": true
+            },
+            {
+                "moduleId": "1f999fa6-64f7-45b4-92ab-03702399a83f",
+                "completed": true
+            },
+            {
+                "moduleId": "new-uuid-5678-9012-3456",
+                "completed": true
+            },
+            {
+                "moduleId": "1231231",
+                "completed": true
+            },
+            {
+                "moduleId": "new-uuid-008",
+                "completed": false
+            },
+            {
+                "moduleId": "new-uuid-011",
+                "completed": true
+            },
+            {
+                "moduleId": "new-uuid-015",
+                "completed": true
+            },
+            {
+                "moduleId": "new-uuid-010",
+                "completed": true
+            },
+            {
+                "moduleId": "new-uuid-009",
+                "completed": true
+            },
+            {
+                "moduleId": "new-uuid-014",
+                "completed": true
+            },
+            {
+                "moduleId": "new-uuid-016",
+                "completed": true
+            },
+            {
+                "moduleId": "new-uuid-013",
+                "completed": true
+            },
+            {
+                "moduleId": "new-uuid-012",
+                "completed": true
+            },
+            {
+                "moduleId": "new-uuid-007",
+                "completed": false
+            }
+        ]
+    }
+]
+,
+"courses":[
+    {
+        "image": "https://example.com/images/advanced-js.png",
+        "teacherName": "Alice Johnson",
+        "level": "Advanced",
+        "description": "Deep dive into closures, prototypes, async/await, and more.",
+        "title": "Advanced JavaScript Concepts",
+        "enrollments": [],
+        "createdAt": "2025-04-19T11:55:29.443Z",
+        "teacherId": "teacher-123",
+        "price": 4900,
+        "category": "Programming",
+        "courseId": "659760de-e1c4-4187-9b34-6aeb369d1db3",
+        "status": "Published",
+        "updatedAt": "2025-04-19T11:57:54.014Z"
+    }
+]
+
+}
+
+
+

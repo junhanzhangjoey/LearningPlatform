@@ -1,0 +1,16 @@
+{
+  "name": "learning-platform",
+  "version": "1.0.0",
+  "scripts": {
+    "backend-dev": "cd LMS-Backend && npm run dev",
+    "frontend-dev": "cd LMS-Frontend && npm run dev",
+    "dev": "concurrently \"npm run backend-dev\" \"npm run frontend-dev\""
+  },
+  "devDependencies": {
+    "@types/react-beautiful-dnd": "^13.1.8",
+    "concurrently": "^8.0.0"
+  },
+  "dependencies": {
+    "@dnd-kit/sortable": "^10.0.0"
+  }
+}

@@ -1,0 +1,61 @@
+services:
+  # Application service (Frontend + Backend)
+  frontend:
+    build:
+      context: ./LMS-Frontend
+      args:
+        - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${CLERK_PUBLISHABLE_KEY}
+        - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
+        - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_API_BASE_URL}
+    ports:
+      - "3000:3000"  # Frontend (Next.js default port)
+    volumes:
+      - ./LMS-Frontend:/app  # Mount the current project directory into the container
+      - /app/node_modules  # Exclude node_modules from host-side mounting to avoid issues
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
+      - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${CLERK_PUBLISHABLE_KEY}
+      - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
+      - DYNAMODB_ENDPOINT=${DYNAMODB_ENDPOINT}  # Backend will connect to this endpoint
+      - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_API_BASE_URL}  # Add this for frontend code compatibility
+      - AWS_REGION=us-east-1  # Add AWS region for DynamoDB
+    env_file:
+      - ./.env # This will load variables from .env file in the root
+    depends_on:
+      - backend
+  backend:
+    build:
+      context: ./LMS-Backend
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./LMS-Backend/:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
+      - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${CLERK_PUBLISHABLE_KEY}
+      - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
+      - DYNAMODB_ENDPOINT=${DYNAMODB_ENDPOINT}
+      - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_API_BASE_URL}
+      - AWS_REGION=us-east-1  # Add AWS region for DynamoDB
+    env_file:
+      - ./.env
+    depends_on:
+      - dynamodb-local
+    
+  # DynamoDB Local service
+  dynamodb-local:
+    image: amazon/dynamodb-local:latest  # Use the official DynamoDB Local Docker image
+    container_name: dynamodb-local
+    ports:
+      - "8000:8000"  # Expose DynamoDB Local on port 8000
+    command: "-jar DynamoDBLocal.jar -sharedDb"
+    user: "1000:1000" # Use a non-root user with proper permissions
+    # volumes:
+    #   - dynamodb-data:/home/dynamodblocal/data
+
+# Define named volumes for data persistence
+volumes:
+  dynamodb-data:
