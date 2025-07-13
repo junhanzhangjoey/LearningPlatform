@@ -39,8 +39,8 @@ const userCourse=new Schema({
     }
 });
 
-
-const Progress = dynamoose.model("Progress", userCourse, {
+const isProduction = process.env.NODE_ENV === "production";
+const Progress = dynamoose.model("Progress", userCourse, isProduction?{}:{
     create: true,  // automatically create a table when running the project
     update: true   // automatically update the schema to match the schema definition
   });

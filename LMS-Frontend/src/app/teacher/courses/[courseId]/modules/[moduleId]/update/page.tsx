@@ -2,6 +2,7 @@
 
 import {useEffect, useState} from 'react'
 import {useParams,useRouter} from 'next/navigation'
+import VideoUpload from '../../../../../../../components/VideoUpload'
 
 type Module={
     title:string;
@@ -15,6 +16,7 @@ export default function UpdateModulePage(){
     const[module, setModule]=useState<Module|null>(null);
     const[submitting, setSubmitting]=useState(false);
     const[loading,setLoading]=useState(true);
+    const[videoUrl, setVideoUrl]=useState<string>('');
 
     useEffect(()=>{
         async function loadModule(){
@@ -22,6 +24,7 @@ export default function UpdateModulePage(){
                 const res=await fetch(`/api/teacher/course/module/${moduleId}`);
                 const data=await res.json();
                 setModule(data);
+                setVideoUrl(data.moduleVideo || '');
             }catch(error){
                 console.error('Failed to load module:',error)
             }finally{
@@ -39,7 +42,7 @@ export default function UpdateModulePage(){
             title: formData.get('title') as string,
             type: formData.get('type') as string,
             content:formData.get('content') as string,
-            moduleVideo:formData.get('moduleVideo') as string,
+            moduleVideo: videoUrl, // 使用上传的视频URL
         }
         
         try{
@@ -60,6 +63,11 @@ export default function UpdateModulePage(){
             setSubmitting(false)
         }
     }
+
+    const handleVideoUploaded = (url: string) => {
+        setVideoUrl(url);
+    };
+
     if(loading||!module) return <p className="p-8">Loading module...</p>
     return (
         <main className="p-8 max-w-2xl mx-auto">
@@ -81,8 +89,11 @@ export default function UpdateModulePage(){
               <textarea name="content" defaultValue={module.content} className="w-full border p-2 rounded" />
             </div>
             <div>
-              <label className="block font-medium mb-1">Video URL</label>
-              <input name="moduleVideo" defaultValue={module.moduleVideo} className="w-full border p-2 rounded" />
+              <label className="block font-medium mb-1">Video</label>
+              <VideoUpload 
+                onVideoUploaded={handleVideoUploaded}
+                currentVideoUrl={videoUrl}
+              />
             </div>
             <button
               type="submit"

@@ -30,8 +30,15 @@ if(!isProduction){
             accessKeyId: process.env.AWS_ACCESS_KEY_ID || "dummy",
             secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "dummy",
         },
-        region: process.env.AWS_REGION || "us-east-1",
+        region: process.env.AWS_REGION || "us-west-1",
         endpoint: process.env.DYNAMODB_ENDPOINT || "http://dynamodb-local:8000"
+    });
+    dynamoose.aws.ddb.set(ddb);
+} else {
+    // 生产环境，自动连接 AWS DynamoDB（不要设置 endpoint）
+    const ddb = new dynamoose.aws.ddb.DynamoDB({
+        region: process.env.AWS_REGION || "us-west-1",
+        // 不要设置 endpoint
     });
     dynamoose.aws.ddb.set(ddb);
 }
@@ -64,11 +71,10 @@ app.use("/users/clerk", requireAuth(),userClerkRoutes);//we will add back requir
 /* SERVER */
 const port=process.env.PORT || 3001;
 console.log(`Attempting to start server on port ${port}`)
-if(!isProduction){
-    app.listen(port,()=>{
-        console.log(`Server running on port ${port}`);
-    }).on('error', (err: any) => {
-        console.error(`Server failed to start on port ${port}:`, err);
-        process.exit(1); // Exit with an error code
-    });
-}
+
+app.listen(port,()=>{
+    console.log(`Server running on port ${port}`);
+}).on('error', (err: any) => {
+    console.error(`Server failed to start on port ${port}:`, err);
+    process.exit(1); // Exit with an error code
+});

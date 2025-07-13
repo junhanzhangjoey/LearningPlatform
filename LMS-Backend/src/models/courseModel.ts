@@ -75,8 +75,8 @@ const courseSchema = new Schema(
       required: true,
       index: {
         name: 'teacherIdIndex',
-        global: true,
-      }as any,
+        type: 'global'
+      },
     },
     teacherName: {
       type: String,
@@ -118,12 +118,13 @@ const courseSchema = new Schema(
     timestamps: true,
   }
 );
+const isProduction = process.env.NODE_ENV === "production";
 
-const Course = dynamoose.model("Course", courseSchema,{
+const Course = dynamoose.model("Course", courseSchema, isProduction?{}:{
   create: true,
   update: true 
 });
-const Module = dynamoose.model("Module", moduleSchema, {
+const Module = dynamoose.model("Module", moduleSchema, isProduction?{}:{
   create: true,  // automatically create a table when running the project
   update: true   // automatically update the schema to match the schema definition
 });

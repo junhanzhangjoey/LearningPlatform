@@ -1,10 +1,8 @@
 import { Request, Response } from "express";
 import {Course,Module} from "../models/courseModel";
-import AWS from "aws-sdk";
+import { s3 } from "../config/aws";
 import { v4 as uuidv4 } from "uuid";
 //import { getAuth } from "@clerk/express";
-
-const s3 = new AWS.S3();
 
 export const listCourses = async (
   req: Request,
@@ -172,6 +170,8 @@ export const getUploadVideoUrl = async (
     res: Response
   ): Promise<void> => {
     const { fileName, fileType } = req.body;
+
+    console.log("这里这里");
   
     if (!fileName || !fileType) {
       res.status(400).json({ message: "File name and type are required" });
@@ -180,22 +180,41 @@ export const getUploadVideoUrl = async (
   
     try {
       const uniqueId = uuidv4();
-      const s3Key = `videos/${uniqueId}/${fileName}`;
+      
+      // 检查是否有AWS配置，如果没有则使用本地存储
+      const useLocalStorage = !process.env.S3_BUCKET_NAME || !process.env.AWS_ACCESS_KEY_ID;
+      
+      if (useLocalStorage) {
+        // 本地存储方案
+        const localVideoUrl = `/uploads/videos/${uniqueId}/${fileName}`;
+        
+        res.json({
+          message: "Local upload URL generated successfully",
+          data: { 
+            uploadUrl: `/api/upload/local/${uniqueId}/${fileName}`, 
+            videoUrl: localVideoUrl,
+            isLocal: true
+          },
+        });
+      } else {
+        // AWS S3 方案
+        const s3Key = `videos/${uniqueId}/${fileName}`;
   
-      const s3Params = {
-        Bucket: process.env.S3_BUCKET_NAME || "",
-        Key: s3Key,
-        Expires: 60,
-        ContentType: fileType,
-      };
+        const s3Params = {
+          Bucket: process.env.S3_BUCKET_NAME || "",
+          Key: s3Key,
+          Expires: 60,
+          ContentType: fileType,
+        };
   
-      const uploadUrl = s3.getSignedUrl("putObject", s3Params);
-      const videoUrl = `${process.env.CLOUDFRONT_DOMAIN}/videos/${uniqueId}/${fileName}`;
+        const uploadUrl = s3.getSignedUrl("putObject", s3Params);
+        const videoUrl = `${process.env.CLOUDFRONT_DOMAIN}/videos/${uniqueId}/${fileName}`;
   
-      res.json({
-        message: "Upload URL generated successfully",
-        data: { uploadUrl, videoUrl },
-      });
+        res.json({
+          message: "Upload URL generated successfully",
+          data: { uploadUrl, videoUrl, isLocal: false },
+        });
+      }
     } catch (error) {
       res.status(500).json({ message: "Error generating upload URL", error });
     }

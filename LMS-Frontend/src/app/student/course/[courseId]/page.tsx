@@ -70,7 +70,8 @@ export default function ModulesDetailPage() {
     try {
       const token = await getToken();
       const res = await fetch(
-        `/api/student/progress/${userId}/${courseId}/${moduleId}`,
+        // `/api/student/progress/${userId}/${courseId}/${moduleId}`,
+        `/api/student/progress/test-catchall/${userId}/${courseId}/${moduleId}`,
         {
           method: 'PATCH',
           headers: {
@@ -88,7 +89,7 @@ export default function ModulesDetailPage() {
 
       //   const errorText = await res.text();  // print error message
       //   console.error('❌ Server error:', errorText);
-
+      console.log("here:",res);
       if (!res.ok) {
         throw new Error('Failed to mark module as completed');
       }

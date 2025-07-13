@@ -121,6 +121,7 @@ export const enrollUserToCourse = async (req: Request, res: Response): Promise<v
 
 //when the user complete a module
 export const updateProgress = async (req: Request, res: Response): Promise<void> => {
+    //console.log("here");
     const { userId, courseId, moduleId } = req.params;
   
     try {

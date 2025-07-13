@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from "@clerk/nextjs/server";
 
+
 type ProgressUpdateBody = {
   userId: string;
   courseId: string;
@@ -28,13 +29,14 @@ async function apiPatch<T>(url: string, body: ProgressUpdateBody,token:string): 
   const data = await res.json();
   return data as T;
 }
-
 // 处理前端PATCH请求
 export async function PATCH(
   req: NextRequest,
 ) {
   try {
+    console.log("here");
     const pathSegments = req.nextUrl.pathname.split('/');
+    console.log("Path segments:", pathSegments);
     const moduleId = pathSegments[pathSegments.length - 1];
     const courseId = pathSegments[pathSegments.length - 2];
     const userId = pathSegments[pathSegments.length - 3];
