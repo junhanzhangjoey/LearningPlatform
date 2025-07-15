@@ -1,9 +1,9 @@
 import {NextRequest,NextResponse} from "next/server";
 import {auth} from "@clerk/nextjs/server"
 export async function POST(req: NextRequest) {
-    const pathSegments=req.nextUrl.pathname.split('/');
+    const { searchParams } = new URL(req.url);
+    const courseId = searchParams.get('courseId');
 
-    const courseId=pathSegments[pathSegments.length-3];
     try{
         const token=await auth().then(a=>a.getToken());//if promise object is returned, then use the then method to get the token
         const backendBaseUrl=process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001";

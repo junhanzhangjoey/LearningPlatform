@@ -6,9 +6,8 @@ export async function PUT(
   try {
     const {getToken}=await auth();
     const body = await req.json(); // 获取前端传来的 modules 新顺序
-    const pathSegments=req.nextUrl.pathname.split('/');
-
-    const courseId = pathSegments[pathSegments.length-3];
+    const {searchParams}= new URL(req.url);
+    const courseId=searchParams.get('courseId');
 
     const backendBaseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001';
     const res = await fetch(`${backendBaseUrl}/modules/${courseId}`, {

@@ -71,9 +71,9 @@ export default function ModulesDetailPage() {
       const token = await getToken();
       const res = await fetch(
         // `/api/student/progress/${userId}/${courseId}/${moduleId}`,
-        `/api/student/progress/test-catchall/${userId}/${courseId}/${moduleId}`,
+        `/api/student/progress/?userId=${userId}&courseId=${courseId}&moduleId=${moduleId}`,
         {
-          method: 'PATCH',
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
@@ -86,6 +86,10 @@ export default function ModulesDetailPage() {
           }),
         }
       );
+
+      console.log('res.status:', res.status);
+      const data = await res.json();
+      console.log('res data:', data);
 
       //   const errorText = await res.text();  // print error message
       //   console.error('❌ Server error:', errorText);

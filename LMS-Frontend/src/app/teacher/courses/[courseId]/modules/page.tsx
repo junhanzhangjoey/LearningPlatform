@@ -62,7 +62,7 @@ export default function ModulesPage() {
 
   // 新增 module
     async function handleAddModule() {
-        const res=await fetch(`/api/teacher/course/${courseId}/modules/add`,{
+        const res=await fetch(`/api/teacher/course/add?courseId=${courseId}`,{
             method:"POST",
             headers:{
                 'Content-Type':'application/json',
@@ -75,7 +75,7 @@ export default function ModulesPage() {
     }
 
     async function handleSubmit() {
-        await fetch(`/api/teacher/course/${courseId}/modules/update`, {
+        await fetch(`/api/teacher/course/update?courseId=${courseId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

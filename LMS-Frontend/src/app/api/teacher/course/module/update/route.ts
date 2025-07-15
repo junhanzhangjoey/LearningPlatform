@@ -2,8 +2,9 @@ import {NextRequest, NextResponse} from 'next/server'
 import {auth} from '@clerk/nextjs/server'
 
 export async function PATCH(req:NextRequest){
-    const pathSegments=req.nextUrl.pathname.split('/');
-    const moduleId=pathSegments[pathSegments.length-2];
+    const {searchParams}=new URL(req.url);
+    const moduleId=searchParams.get('moduleId');
+    
     const token =await auth().then(a=>a.getToken());
     const backEndBaseUrl=process.env.NEXT_PUBLIC_BACKEND_URL||'http://localhost:3001'
     const body=await req.json();

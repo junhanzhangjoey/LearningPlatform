@@ -1,3 +1,15 @@
+// import { NextRequest, NextResponse } from 'next/server';
+
+// export async function POST(req: NextRequest) {
+//     const { searchParams } = new URL(req.url);
+//     const userId = searchParams.get('userId');
+//     const courseId = searchParams.get('courseId');
+//     const moduleId = searchParams.get('moduleId');
+//   const body = await req.json();
+//   console.log('POST called', { userId, courseId, moduleId, body });
+//   return NextResponse.json({ message: "POST works!", userId, courseId, moduleId, body });
+// }
+
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from "@clerk/nextjs/server";
 
@@ -9,12 +21,12 @@ type ProgressUpdateBody = {
   completed: boolean;
 };
 
-async function apiPatch<T>(url: string, body: ProgressUpdateBody,token:string): Promise<T> {
+async function apiPost<T>(url: string, body: ProgressUpdateBody,token:string): Promise<T> {
   const backendBaseUrl =
     process.env.NEXT_PUBLIC_BACKEND_URL || 'http://backend:3001';
 
   const res = await fetch(`${backendBaseUrl}${url}`, {
-    method: 'PATCH',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
@@ -30,19 +42,14 @@ async function apiPatch<T>(url: string, body: ProgressUpdateBody,token:string): 
   return data as T;
 }
 // 处理前端PATCH请求
-export async function PATCH(
+export async function POST(
   req: NextRequest,
 ) {
   try {
-    console.log("here");
-    const pathSegments = req.nextUrl.pathname.split('/');
-    console.log("Path segments:", pathSegments);
-    const moduleId = pathSegments[pathSegments.length - 1];
-    const courseId = pathSegments[pathSegments.length - 2];
-    const userId = pathSegments[pathSegments.length - 3];
-    console.log('moduleId: ',moduleId);
-    console.log('courseId: ',courseId);
-    console.log('userId: ',userId);
+    const { searchParams } = new URL(req.url);
+    const userId = searchParams.get('userId');
+    const courseId = searchParams.get('courseId');
+    const moduleId = searchParams.get('moduleId');
 
     if (!userId || !courseId || !moduleId) {
       return NextResponse.json(
@@ -58,7 +65,7 @@ export async function PATCH(
     if (!token) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-    const result = await apiPatch(
+    const result = await apiPost(
       `/progress/${userId}/${courseId}/${moduleId}`,
       body,
       token,

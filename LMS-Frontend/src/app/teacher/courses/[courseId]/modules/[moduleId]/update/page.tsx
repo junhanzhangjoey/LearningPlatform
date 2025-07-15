@@ -46,7 +46,7 @@ export default function UpdateModulePage(){
         }
         
         try{
-            const res=await fetch(`/api/teacher/course/module/${moduleId}/update`,{
+            const res=await fetch(`/api/teacher/course/module/update?moduleId=${moduleId}`,{
                 method:'PATCH',
                 headers:{
                     'Content-Type':'application/json',

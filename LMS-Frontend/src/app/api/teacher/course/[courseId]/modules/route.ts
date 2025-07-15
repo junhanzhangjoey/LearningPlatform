@@ -26,16 +26,16 @@ async function apiGet<T>(url: string,token:string): Promise<T> {
     throw error;
   }
 }
-export async function GET(_req: NextRequest, {params}: {params:Promise<{courseId: string}> } ) {
+export async function GET(_req: NextRequest, {params}: {params:Promise<{CourseId: string}> } ) {
   try {
     const { getToken } = await auth();
     const token = await getToken();
 
-    const {courseId}=await params;
+    const {CourseId}=await params;
     if (!token) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-    const courses = await apiGet(`/modules/${courseId}`,token);
+    const courses = await apiGet(`/modules/${CourseId}`,token);
     
     //console.log('courses from backend:', courses);
 

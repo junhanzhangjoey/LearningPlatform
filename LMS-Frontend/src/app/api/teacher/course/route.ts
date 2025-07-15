@@ -11,8 +11,8 @@ export async function PUT(req: NextRequest) {
 
     const backendBaseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001'
     const body = await req.json()
-    const pathSegments=req.nextUrl.pathname.split('/');
-    const courseId=pathSegments[pathSegments.length-1];
+    const { searchParams } = new URL(req.url);
+    const courseId = searchParams.get('courseId');
 
     const res = await fetch(`${backendBaseUrl}/courses/${courseId}`, {
       method: 'PUT',

@@ -50,7 +50,7 @@ export default function EditCoursePage() {
     }
 
     try {
-      const res = await fetch(`/api/teacher/course/${courseId}`, {
+      const res = await fetch(`/api/teacher/course/?courseId=${courseId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

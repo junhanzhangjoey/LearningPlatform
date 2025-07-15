@@ -42,7 +42,7 @@ export default function StudentPage() {
       const userId = user?.id;
       console.log('Current user id:', userId);
       try {
-        
+
         const token = await getToken();
         const res = await fetch(
           `/api/student/assigned-courses?userId=${userId}`,//get all enrolled courses
