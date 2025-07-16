@@ -17,7 +17,7 @@ export default function HomePage() {
     if (isSignedIn) {
       // Assuming role stored in publicMetadata.role
       const role = (user?.publicMetadata as CustomMetadata)?.role;
-      const destination = role ? `/${role}` : '/student';
+      const destination = role ? `/${role.toLowerCase()}` : '/student';
       router.push(destination);
     }
   }, [isSignedIn, user, router]);

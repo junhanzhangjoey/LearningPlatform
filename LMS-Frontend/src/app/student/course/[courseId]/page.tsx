@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation'; //the parameter from the other page
 import { useState, useEffect } from 'react';
 import { useUser,useAuth} from '@clerk/nextjs';
 import Link from 'next/link';
+import VideoPlayer from '@/components/VideoPlayer';
 
 export type Module = {
   moduleId: string;
@@ -139,11 +140,16 @@ export default function ModulesDetailPage() {
                   <h2 className="text-lg font-semibold mt-4 mb-2">
                     Video URL:
                   </h2>
-                  <p>
+                  <div className={`bg-black rounded-lg overflow-hidden max-w-xl w-full mx-auto`}
+                    
+                    onClick={(e)=>{
+                      e.stopPropagation();
+                    }}
+                    >
                     {mod.moduleVideo
-                      ? mod.moduleVideo
+                      ? <VideoPlayer videoUrl={mod.moduleVideo} title={mod.title} className="my-4"/>
                       : 'No video for this module.'}
-                  </p>
+                  </div>
                   {!mod.completed ? (
                     <button
                       onClick={(e) => {

@@ -47,13 +47,12 @@ export default function VideoUpload({ onVideoUploaded, currentVideoUrl }: VideoU
           fileType: file.type,
         }),
       });
-
+      
       if (!urlResponse.ok) {
         throw new Error('Failed to get upload URL');
       }
-
-      const { uploadUrl, videoUrl, isLocal } = await urlResponse.json();
-
+      const {data}=await urlResponse.json();
+      const { uploadUrl, videoUrl, isLocal } = data;
       if (isLocal) {
         // 本地存储上传
         const formData = new FormData();

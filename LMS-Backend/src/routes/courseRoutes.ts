@@ -3,7 +3,7 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import {getCourse, listCourses, updateCourse,createCourse,deleteCourse,getCourseOfTeacher, getUploadVideoUrl} from "../controllers/courseController";
-import {getCourseModules, reorderAndAddModules} from "../controllers/moduleController";
+import {getCourseModules} from "../controllers/moduleController";
 //import{requireAuth} from "@clerk/express";
 
 const router = express.Router();

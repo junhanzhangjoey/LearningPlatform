@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { auth } from '@clerk/nextjs/server';
 
 export async function POST(request: NextRequest) {
+  const { getToken } = await auth()
+  const token = await getToken()
+
   try {
     const { fileName, fileType } = await request.json();
     // console.log("哇呃呃我",fileName, fileType);
@@ -18,6 +22,7 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+    
 
     // 调用后端API获取预签名URL
     const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://backend:3001';
@@ -25,20 +30,21 @@ export async function POST(request: NextRequest) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ fileName, fileType }),
     });
-    console.log("哇呃呃我",await response.json());
-
+    //console.log("哇呃呃我",await response.json());
+    const res = await response.json();
     if (!response.ok) {
-      const error = await response.json();
+      const error = res;
       return NextResponse.json(
         { error: error.message || 'Failed to get upload URL' },
         { status: response.status }
       );
     }
 
-    const data = await response.json();
+    const data = res;
     return NextResponse.json(data);
 
   } catch (error) {

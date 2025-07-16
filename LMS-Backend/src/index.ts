@@ -60,7 +60,7 @@ app.use(clerkMiddleware());
 
 /* ROUTES */
 app.get("/",(req,res)=>{
-    res.send("Hello World")
+    res.send("啊啊啊啊")
 });
 
 app.use("/courses", requireAuth(),courseRoutes); //any route in courseRoutes are mounted under /courses

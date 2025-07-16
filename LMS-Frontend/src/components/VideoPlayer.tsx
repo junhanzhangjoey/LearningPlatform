@@ -68,13 +68,17 @@ export default function VideoPlayer({ videoUrl, title, className = '' }: VideoPl
     if (videoRef.current) {
       videoRef.current.volume = newVolume;
       setVolume(newVolume);
+      if(videoRef.current.muted&&newVolume>0){
+        videoRef.current.muted=false;
+        setIsMuted(false);
+      }
     }
   };
 
   const toggleMute = () => {
     if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
     }
   };
 
@@ -118,7 +122,7 @@ export default function VideoPlayer({ videoUrl, title, className = '' }: VideoPl
       <div className="relative">
         <video
           ref={videoRef}
-          className="w-full"
+          className="w-full max-h-[400px] object-contain"
           src={videoUrl}
           onLoadedMetadata={() => {
             if (videoRef.current) {
@@ -180,8 +184,8 @@ export default function VideoPlayer({ videoUrl, title, className = '' }: VideoPl
                     </svg>
                   ) : (
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM12.293 7.293a1 1 0 011.414 0L15 8.586l1.293-1.293a1 1 0 111.414 1.414L16.414 10l1.293 1.293a1 1 0 01-1.414 1.414L15 11.414l-1.293 1.293a1 1 0 01-1.414-1.414L13.586 10l-1.293-1.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
+    <path d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217z" />
+  </svg>
                   )}
                 </button>
                 <input
