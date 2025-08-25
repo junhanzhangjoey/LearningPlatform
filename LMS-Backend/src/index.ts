@@ -10,6 +10,8 @@ import {
     createClerkClient,
     requireAuth,
   } from "@clerk/express";
+import serverless from "serverless-http";
+import seed from "./seed/seedDynamodb";
 
 
 /*ROUTE IMPORTS */
@@ -68,13 +70,32 @@ app.use("/modules",requireAuth(),moduleRoutes);
 app.use("/progress", requireAuth(),progressRoutes); //any route in progressRoutes are mounted under /progress
 app.use("/users/clerk", requireAuth(),userClerkRoutes);//we will add back requireAuth() after implement all the feature, use mock userId for now
 
-/* SERVER */
-const port=process.env.PORT || 3001;
-console.log(`Attempting to start server on port ${port}`)
+// 检测是否在 Lambda 环境中运行
+const isLambda = process.env.AWS_LAMBDA_FUNCTION_NAME !== undefined;
 
-app.listen(port,()=>{
-    console.log(`Server running on port ${port}`);
-}).on('error', (err: any) => {
-    console.error(`Server failed to start on port ${port}:`, err);
-    process.exit(1); // Exit with an error code
-});
+if (!isLambda) {
+    /* SERVER - 只在非 Lambda 环境中启动 Express 服务器 */
+    const port = process.env.PORT || 3001;
+    console.log(`Attempting to start server on port ${port}`);
+
+    app.listen(port, () => {
+        console.log(`Server running on port ${port}`);
+    }).on('error', (err: any) => {
+        console.error(`Server failed to start on port ${port}:`, err);
+        process.exit(1); // Exit with an error code
+    });
+}
+
+// Lambda handler - 只在 Lambda 环境中使用
+const serverlessApp = serverless(app);
+export const handler = async (event: any, context: any) => {
+    if (event.action === "seed") {
+        await seed();
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ message: "Data seeded successfully" }),
+        };
+    } else {
+        return serverlessApp(event, context);
+    }
+};

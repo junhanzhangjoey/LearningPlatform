@@ -7,7 +7,8 @@
     "build": "rimraf dist && npx tsc",
     "start": "npm run build && node dist/index.js",
     "dev": "npm run build && concurrently \"npx tsc -w\" \"npm run seed\" \"nodemon --exec ts-node src/index.ts\"",
-    "seed": "ts-node src/seed/seedDynamodb.ts"
+    "seed": "ts-node src/seed/seedDynamodb.ts",
+    "check-aws": "ts-node src/utils/checkAwsInfo.ts"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +30,7 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.2",
     "pluralize": "^8.0.0",
+    "serverless-http": "^3.2.0",
     "uuid": "^11.1.0"
   },
   "devDependencies": {
