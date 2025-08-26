@@ -73,8 +73,13 @@ export default function StudentPage() {
     loadCourses();
   }, [user?.id,getToken]);
   console.log("progresses state value:", progresses);
-  const enrolledIds = new Set(progresses.map((c) => c.courseId));
-  const unenrolledCourses = courses.filter(
+  
+  // 确保数据是数组，防止 map 函数错误
+  const safeProgresses = Array.isArray(progresses) ? progresses : [];
+  const safeCourses = Array.isArray(courses) ? courses : [];
+  
+  const enrolledIds = new Set(safeProgresses.map((c) => c.courseId));
+  const unenrolledCourses = safeCourses.filter(
     (course) => !enrolledIds.has(course.courseId)
   ); //filter out enrolled courses
   async function handleEnroll(courseId: string) {
@@ -105,12 +110,12 @@ export default function StudentPage() {
       ) : (
         <>
           <h2 className="text-2xl font-bold mb-4">Assigned Courses</h2>
-          {progresses.length === 0 ? (
+          {safeProgresses.length === 0 ? (
             <p>No assigned courses.</p>
           ) : (
             <ul className="space-y-4">
-              {progresses.map((course) => {
-                const courseInfo=courses.find(c=>c.courseId===course.courseId)
+              {safeProgresses.map((course) => {
+                const courseInfo=safeCourses.find(c=>c.courseId===course.courseId)
                 return(
                 <li key={course.courseId} className="p-4 border rounded shadow">
                   <Link href={`/student/course/${course.courseId}`}>

@@ -10,6 +10,12 @@
     "format": "prettier --write \"src/**/*.{js,ts,jsx,tsx,json,md,css}\"",
     "prepare": "husky install || true"
   },
+  "config": {
+    "registry": "https://registry.npmjs.org/",
+    "fetch-retries": 3,
+    "fetch-retry-mintimeout": 10000,
+    "fetch-retry-maxtimeout": 60000
+  },
   "dependencies": {
     "@clerk/clerk-sdk-node": "^4.13.23",
     "@clerk/nextjs": "^6.19.1",
@@ -52,5 +58,6 @@
       "prettier --write",
       "git add"
     ]
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }
